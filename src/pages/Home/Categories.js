@@ -20,8 +20,8 @@ class Categories extends Component {
         <p className="categories-title">Categorias:</p>
         <div className="categories-list">
           {categories.map((category) => (
-            <p className="category" data-testid="category">
-              {category}
+            <p className="category" data-testid="category" key={category.id}>
+              {category.name}
             </p>
           ))}
         </div>
