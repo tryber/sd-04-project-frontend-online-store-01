@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function CartTotals() {
   return (
     <Link to="/checkout">
-      <button type="button">Click Me!</button>
+      <button type="button" data-testid="checkout-products">Finalizar Compra</button>
     </Link>
   );
 }
