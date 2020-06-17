@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; //Comment
 import * as api from '../../services/api';
 
 class Categories extends Component {
