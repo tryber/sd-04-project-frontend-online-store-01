@@ -26,10 +26,6 @@ class Home extends Component {
     this.changeCategory = this.changeCategory.bind(this);
   }
 
-  changeCategory(event) {
-    this.setState({ category: event.target.value });
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevState.category !== this.state.category) {
       api
@@ -41,6 +37,10 @@ class Home extends Component {
 
   getProducts(query) {
     api.getProductsFromQuery(query).then((products) => this.setState({ products }));
+  }
+
+  changeCategory(event) {
+    this.setState({ category: event.target.value });
   }
 
   changeHandle(event) {
