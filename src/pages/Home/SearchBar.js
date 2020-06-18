@@ -1,27 +1,7 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userTyped: null,
-      search: false,
-    }
-    this.handleInputChangeTyped = this.handleInputChangeTyped.bind(this);
-    this.toSearch = this.toSearch.bind(this);
-  }
 
-  handleInputChangeTyped(event) {
-    this.setState({
-      userTyped: event.target.value,
-    })
-  }
-
-  toSearch() {
-    this.setState({
-      search: true,
-    })
-  }
 
   render() {
     return (

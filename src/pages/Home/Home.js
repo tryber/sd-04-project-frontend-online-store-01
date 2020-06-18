@@ -6,6 +6,32 @@ import ProductList from './ProductList';
 import SearchBar from './SearchBar';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userTyped: null,
+      search: false,
+      products: null,
+    }
+  }
+
+
+  handleInputChangeTyped(event) {
+    this.setState({
+      userTyped: event.target.value,
+    })
+  }
+
+  toSearch() {
+    this.setState({
+      search: true,
+    })
+  }
+
+  searchUserTypedONsearchbar(query){
+    api.getProductsFromQuery(query).then((products) =>)
+  }
+
   render() {
     return (
       <div>
