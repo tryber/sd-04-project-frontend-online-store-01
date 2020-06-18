@@ -1,11 +1,6 @@
 import React from 'react';
-import * as api from '../../services/api';
 
 class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { changeHandle, inputValue, getProducts } = this.props;
 

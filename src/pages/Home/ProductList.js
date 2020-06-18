@@ -2,10 +2,6 @@ import React from 'react';
 import Product from './Product';
 
 class ProductList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { products } = this.props;
     console.log(products);
