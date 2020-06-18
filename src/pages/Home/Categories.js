@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as api from '../../services/api';
 
+import './Home.css';
+
 class Categories extends Component {
   constructor(props) {
     super(props);
@@ -14,15 +16,25 @@ class Categories extends Component {
 
   render() {
     const { categories } = this.state;
+    const { changeCategory } = this.props;
 
     return (
       <div className="categories-container">
         <p className="categories-title">Categorias:</p>
         <div className="categories-list">
           {categories.map((category) => (
-            <p className="category" data-testid="category" key={category.id}>
-              {category.name}
-            </p>
+            <div key={category.id}>
+              <label className="category" htmlFor={category.id} data-testid="category">
+                <input
+                  type="radio"
+                  name="categorie"
+                  value={category.id}
+                  onChange={(event) => changeCategory(event)}
+                />
+                {category.name}
+              </label>
+              <br />
+            </div>
           ))}
         </div>
       </div>
