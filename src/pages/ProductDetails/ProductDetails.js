@@ -7,7 +7,7 @@ import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 class ProductDetails extends React.Component {
   render() {
     return (
-      <>
+      <div>
         <div>
           <Link data-testid="shopping-cart-button" to="/shoppingcart">
             <FontAwesomeIcon icon={faShoppingCart} />
@@ -17,7 +17,7 @@ class ProductDetails extends React.Component {
         <div className="product-details-wrapper">
           <h2 data-testid="product-datail-name">Nome do produto</h2>
         </div>
-      </>
+      </div>
     );
   }
 }
