@@ -32,13 +32,7 @@ class Home extends Component {
         .getProductsFromCategories(this.state.category)
         .then((categoryProducts) => {
           this.setState({ products: categoryProducts.results });
-          console.log('teste')
-          console.log(this.state);
-          // console.log('estado atualizado');
-          // console.log(this.state);
         });
-
-      // (categoryProducts => console.log(categoryProducts.results)))
     }
   }
 
