@@ -17,7 +17,6 @@ class ShoppingCart extends React.Component {
 
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
-    // this.sumTotal = this.sumTotal.bind(this);
   }
 
   componentDidMount() {
