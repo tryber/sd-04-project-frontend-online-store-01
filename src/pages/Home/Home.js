@@ -29,18 +29,17 @@ class Home extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.category !== this.state.category) {
       api
-        .getProductsFromCategories(this.state.category)
+        .getProductsFromCategoryAndQuery(null, this.state.category)
         .then((categoryProducts) => {
           this.setState({ products: categoryProducts.results });
         });
     }
   }
 
-  getProducts() {
+  async getProducts() {
     const { inputValue } = this.state;
-    api
-      .getProductsFromQuery(inputValue)
-      .then((products) => this.setState({ products: products.results }));
+    const products = await api.getProductsFromCategoryAndQuery(inputValue);
+    this.setState({ products: products.results });
   }
 
   changeCategory(event) {
