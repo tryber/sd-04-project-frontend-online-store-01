@@ -14,51 +14,53 @@ class App extends React.Component {
   }
 
   addToCartHandler(newProduct) {
-    this.setState((state) => ({
-      cartProducts: [...state.cartProducts, newProduct],
-    }));
+    this.setState((state) => ({ cartProducts: [...state.cartProducts, newProduct] }));
+  }
+
+  routes() {
+    const { cartProducts } = this.state;
+    return (
+      <>
+        <Route
+          path="/product/:produtctID"
+          render={() => <ProductDetails addToCart={this.addToCartHandler} />}
+        />
+        <Route
+          path="/checkout"
+          render={() => (
+            <Checkout
+              addToCart={this.addToCartHandler}
+              cartProducts={cartProducts}
+            />
+          )}
+        />
+        <Route
+          path="/shoppingcart"
+          render={() => (
+            <ShoppingCart
+              addToCart={this.addToCartHandler}
+              cartProducts={cartProducts}
+            />
+          )}
+        />
+        <Route
+          path="/"
+          render={() => (
+            <Home
+              addToCart={this.addToCartHandler}
+              cartProducts={cartProducts}
+            />
+          )}
+        />
+      </>
+    );
   }
 
   render() {
-    const { cartProducts } = this.state;
     return (
       <div className="App">
         <Router>
-          <Switch>
-            <Route
-              path="/product/:produtctID"
-              render={() => (
-                <ProductDetails addToCart={this.addToCartHandler} />
-              )}
-            />
-            <Route
-              path="/checkout"
-              render={() => (
-                <Checkout
-                  addToCart={this.addToCartHandler}
-                  cartProducts={cartProducts}
-                />
-              )}
-            />
-            <Route
-              path="/shoppingcart"
-              render={() => (
-                <ShoppingCart
-                  addToCart={this.addToCartHandler}
-                  cartProducts={cartProducts}
-                />
-              )}
-            />
-            <Route
-              path="/"
-              render={() => (
-                <Home
-                  addToCart={this.addToCartHandler}
-                  cartProducts={cartProducts}
-                />
-              )}
-            />
-          </Switch>
+          <Switch>{this.routes()}</Switch>
         </Router>
       </div>
     );
