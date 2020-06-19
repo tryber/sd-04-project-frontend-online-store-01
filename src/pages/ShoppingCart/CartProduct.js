@@ -4,9 +4,7 @@ class CartProduct extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      productQuantity: 1,
-    };
+    this.state = { productQuantity: 1 };
   }
 
   increaseQuantity() {

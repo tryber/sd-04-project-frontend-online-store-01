@@ -10,9 +10,7 @@ class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      totalToPay: 0,
-    };
+    this.state = { totalToPay: 0 };
   }
 
   componentDidMount() {
