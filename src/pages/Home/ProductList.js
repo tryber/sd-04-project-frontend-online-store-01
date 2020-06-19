@@ -3,7 +3,7 @@ import Product from './Product';
 
 class ProductList extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, addToCart } = this.props;
     console.log(products);
     if (products.length < 1) {
       return (
@@ -16,7 +16,7 @@ class ProductList extends React.Component {
     return (
       <div>
         {products.map((product) => (
-          <Product key={product.name} product={product} />
+          <Product key={product.name} product={product} addToCart={addToCart} />
         ))}
       </div>
     );

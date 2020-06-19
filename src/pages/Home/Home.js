@@ -52,6 +52,7 @@ class Home extends Component {
   }
 
   render() {
+    const { addToCart } = this.props;
     const { inputValue, products } = this.state;
     return (
       <div>
@@ -75,7 +76,7 @@ class Home extends Component {
             <Categories changeCategory={this.changeCategory} />
           </div>
           <div className="products-list">
-            <ProductList products={products} />
+            <ProductList products={products} addToCart={addToCart} />
           </div>
         </div>
       </div>

@@ -7,20 +7,68 @@ import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
 import Checkout from './pages/Checkout/Checkout';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 
-function App() {
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/product/:produtctID" component={ProductDetails} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/shoppingcart" component={ShoppingCart} />
-          <Route path="/" component={Home} />
-          <ProductList />
-        </Switch>
-      </Router>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cartProducts: [],
+    };
+    this.addToCartHandler = this.addToCartHandler.bind(this);
+  }
+
+  addToCartHandler(newProduct) {
+    this.setState((state) => ({
+      cartProducts: [...state.cartProducts, newProduct],
+    }));
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route
+              path="/product/:produtctID"
+              render={(props) => (
+                <ProductDetails {...props} addToCart={this.addToCartHandler} />
+              )}
+            />
+            <Route
+              path="/checkout"
+              render={(props) => (
+                <Checkout
+                  {...props}
+                  addToCart={this.addToCartHandler}
+                  cartProducts={this.state.cartProducts}
+                />
+              )}
+            />
+            <Route
+              path="/shoppingcart"
+              render={(props) => (
+                <ShoppingCart
+                  {...props}
+                  addToCart={this.addToCartHandler}
+                  cartProducts={this.state.cartProducts}
+                />
+              )}
+            />
+            <Route
+              path="/"
+              render={(props) => (
+                <Home
+                  {...props}
+                  addToCart={this.addToCartHandler}
+                  cartProducts={this.state.cartProducts}
+                />
+              )}
+            />
+            <ProductList />
+          </Switch>
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
