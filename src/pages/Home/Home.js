@@ -36,9 +36,10 @@ class Home extends Component {
     }
   }
 
-  getProducts(query) {
+  getProducts() {
+    const { inputValue } = this.state;
     api
-      .getProductsFromQuery(query)
+      .getProductsFromQuery(inputValue)
       .then((products) => this.setState({ products: products.results }));
   }
 
