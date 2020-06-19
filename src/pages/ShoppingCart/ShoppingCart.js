@@ -33,16 +33,12 @@ class ShoppingCart extends React.Component {
   }
 
   increaseQuantity() {
-    this.setState((state) => {
-      return ({ productQuantity: state.productQuantity + 1 });
-    });
+    this.setState((state) => ({ productQuantity: state.productQuantity + 1 }));
   }
 
   decreaseQuantity() {
     if (this.state.productQuantity > 1) {
-      this.setState((state) => {
-        return ({ productQuantity: state.productQuantity - 1 });
-      });
+      this.setState((state) => ({ productQuantity: state.productQuantity - 1 }));
     }
   }
 
