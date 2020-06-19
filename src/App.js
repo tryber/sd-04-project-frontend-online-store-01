@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import ProductList from './pages/Home/ProductList';
 import Home from './pages/Home/Home';
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
 import Checkout from './pages/Checkout/Checkout';
@@ -10,9 +9,7 @@ import ProductDetails from './pages/ProductDetails/ProductDetails';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      cartProducts: [],
-    };
+    this.state = { cartProducts: [] };
     this.addToCartHandler = this.addToCartHandler.bind(this);
   }
 
@@ -23,47 +20,44 @@ class App extends React.Component {
   }
 
   render() {
+    const { cartProducts } = this.state;
     return (
       <div className="App">
         <Router>
           <Switch>
             <Route
               path="/product/:produtctID"
-              render={(props) => (
-                <ProductDetails {...props} addToCart={this.addToCartHandler} />
+              render={() => (
+                <ProductDetails addToCart={this.addToCartHandler} />
               )}
             />
             <Route
               path="/checkout"
-              render={(props) => (
+              render={() => (
                 <Checkout
-                  {...props}
                   addToCart={this.addToCartHandler}
-                  cartProducts={this.state.cartProducts}
+                  cartProducts={cartProducts}
                 />
               )}
             />
             <Route
               path="/shoppingcart"
-              render={(props) => (
+              render={() => (
                 <ShoppingCart
-                  {...props}
                   addToCart={this.addToCartHandler}
-                  cartProducts={this.state.cartProducts}
+                  cartProducts={cartProducts}
                 />
               )}
             />
             <Route
               path="/"
-              render={(props) => (
+              render={() => (
                 <Home
-                  {...props}
                   addToCart={this.addToCartHandler}
-                  cartProducts={this.state.cartProducts}
+                  cartProducts={cartProducts}
                 />
               )}
             />
-            <ProductList />
           </Switch>
         </Router>
       </div>
