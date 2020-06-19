@@ -23,12 +23,7 @@ class App extends React.Component {
     return (
       <Route
         path={path}
-        render={() => (
-          <ElementName
-            addToCart={this.addToCartHandler}
-            cartProducts={cartProducts}
-          />
-        )}
+        render={() => <ElementName addToCart={this.addToCartHandler} cartProducts={cartProducts} />}
       />
     );
   }
