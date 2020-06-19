@@ -11,7 +11,7 @@ class SearchBar extends React.Component {
           data-testid="query-input"
           onChange={changeHandle}
         />
-        <button data-testid="query-button" onClick={() => getProducts()}>
+        <button type="button" data-testid="query-button" onClick={getProducts}>
           PESQUISAR
         </button>
       </div>
