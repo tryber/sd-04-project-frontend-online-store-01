@@ -11,12 +11,8 @@ class ShoppingCart extends React.Component {
     super(props);
 
     this.state = {
-      productQuantity: 1,
       totalToPay: 0,
     };
-
-    this.increaseQuantity = this.increaseQuantity.bind(this);
-    this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -32,19 +28,9 @@ class ShoppingCart extends React.Component {
     }
   }
 
-  increaseQuantity() {
-    this.setState((state) => ({ productQuantity: state.productQuantity + 1 }));
-  }
-
-  decreaseQuantity() {
-    if (this.state.productQuantity > 1) {
-      this.setState((state) => ({ productQuantity: state.productQuantity - 1 }));
-    }
-  }
-
   render() {
     const { cartProducts } = this.props;
-    const { productQuantity, totalToPay } = this.state;
+    const { totalToPay } = this.state;
     return (
       <div>
         <div className="shopping-cart-icon ">
@@ -53,12 +39,7 @@ class ShoppingCart extends React.Component {
           </Link>
         </div>
         <h1>Carrinho de Compras</h1>
-        <CartProductsList
-          increaseQuantity={this.increaseQuantity}
-          decreaseQuantity={this.decreaseQuantity}
-          cartProducts={cartProducts}
-          productQuantity={productQuantity}
-        />
+        <CartProductsList cartProducts={cartProducts} />
         <p>Valor Total da Compra: R${totalToPay}</p>
         <Link to="/checkout">
           <button type="button" data-testid="checkout-products">
