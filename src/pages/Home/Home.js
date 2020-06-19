@@ -30,13 +30,16 @@ class Home extends Component {
     if (prevState.category !== this.state.category) {
       api
         .getProductsFromCategories(this.state.category)
-        .then((categoryProducts) => this.setState({ products: categoryProducts.results }));
-      // (categoryProducts => console.log(categoryProducts.results)))
+        .then((categoryProducts) => {
+          this.setState({ products: categoryProducts.results });
+        });
     }
   }
 
   getProducts(query) {
-    api.getProductsFromQuery(query).then((products) => this.setState({ products }));
+    api
+      .getProductsFromQuery(query)
+      .then((products) => this.setState({ products: products.results }));
   }
 
   changeCategory(event) {
@@ -59,7 +62,10 @@ class Home extends Component {
           />
           <div className="shopping-cart-icon ">
             <Link data-testid="shopping-cart-button" to="/shoppingcart">
-              <FontAwesomeIcon icon={faShoppingCart} className="faShoppingCart" />
+              <FontAwesomeIcon
+                icon={faShoppingCart}
+                className="faShoppingCart"
+              />
             </Link>
           </div>
         </div>
