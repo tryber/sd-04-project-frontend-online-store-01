@@ -22,11 +22,9 @@ class ShoppingCart extends React.Component {
   componentDidMount() {
     const { cartProducts } = this.props;
     console.log(cartProducts);
-    let totalsArr = [];
+    const totalsArr = [];
     if (cartProducts.length > 1) {
-      cartProducts.map((cartProduct) => {
-        return totalsArr.push(cartProduct.price);
-      });
+      cartProducts.map((cartProduct) => totalsArr.push(cartProduct.price));
       totalsArr.reduce((acc, curr) => {
         const total = acc + curr;
         return this.setState({ totalToPay: total });
@@ -36,18 +34,16 @@ class ShoppingCart extends React.Component {
 
   increaseQuantity() {
     this.setState((state) => {
-      return { productQuantity: state.productQuantity + 1 };
+      return ({ productQuantity: state.productQuantity + 1 });
     });
-    console.log(this.state.productQuantity);
   }
 
   decreaseQuantity() {
     if (this.state.productQuantity > 1) {
       this.setState((state) => {
-        return { productQuantity: state.productQuantity - 1 };
+        return ({ productQuantity: state.productQuantity - 1 });
       });
     }
-    console.log(this.state.productQuantity);
   }
 
   render() {
