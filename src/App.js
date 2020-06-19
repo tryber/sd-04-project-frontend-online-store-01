@@ -17,42 +17,19 @@ class App extends React.Component {
     this.setState((state) => ({ cartProducts: [...state.cartProducts, newProduct] }));
   }
 
-  routes() {
+  routeMaker(element, path) {
+    const ElementName = element;
     const { cartProducts } = this.state;
     return (
-      <>
-        <Route
-          path="/product/:produtctID"
-          render={() => <ProductDetails addToCart={this.addToCartHandler} />}
-        />
-        <Route
-          path="/checkout"
-          render={() => (
-            <Checkout
-              addToCart={this.addToCartHandler}
-              cartProducts={cartProducts}
-            />
-          )}
-        />
-        <Route
-          path="/shoppingcart"
-          render={() => (
-            <ShoppingCart
-              addToCart={this.addToCartHandler}
-              cartProducts={cartProducts}
-            />
-          )}
-        />
-        <Route
-          path="/"
-          render={() => (
-            <Home
-              addToCart={this.addToCartHandler}
-              cartProducts={cartProducts}
-            />
-          )}
-        />
-      </>
+      <Route
+        path={path}
+        render={() => (
+          <ElementName
+            addToCart={this.addToCartHandler}
+            cartProducts={cartProducts}
+          />
+        )}
+      />
     );
   }
 
@@ -60,7 +37,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-          <Switch>{this.routes()}</Switch>
+          <Switch>
+            {this.routeMaker(ProductDetails, '/product/:produtctID')}
+            {this.routeMaker(Checkout, '/checkout')}
+            {this.routeMaker(ShoppingCart, '/shoppingCart')}
+            {this.routeMaker(Home)}
+          </Switch>
         </Router>
       </div>
     );
