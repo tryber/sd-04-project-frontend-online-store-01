@@ -14,7 +14,9 @@ class App extends React.Component {
   }
 
   addToCartHandler(newProduct) {
-    this.setState((state) => ({ cartProducts: [...state.cartProducts, newProduct] }));
+    this.setState((state) => ({
+      cartProducts: [...state.cartProducts, newProduct],
+    }));
   }
 
   routeMaker(element, path) {
@@ -23,8 +25,9 @@ class App extends React.Component {
     return (
       <Route
         path={path}
-        render={() => (
+        render={(props) => (
           <ElementName
+            {...props}
             addToCart={this.addToCartHandler}
             cartProducts={cartProducts}
           />
@@ -38,7 +41,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <Switch>
-            {this.routeMaker(ProductDetails, '/product/:produtctID')}
+            {this.routeMaker(ProductDetails, '/product/:productID')}
             {this.routeMaker(Checkout, '/checkout')}
             {this.routeMaker(ShoppingCart, '/shoppingCart')}
             {this.routeMaker(Home)}

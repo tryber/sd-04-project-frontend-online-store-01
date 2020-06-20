@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
   render() {
@@ -9,9 +10,18 @@ class Product extends Component {
         <h4>{title}</h4>
         <img src={thumbnail} alt={title} />
         <p>{`Preço: ${price}`}</p>
-        <button onClick={() => addToCart(product)} type="button">
+        <button data-testid="product-add-to-cart" onClick={() => addToCart(product)} type="button">
           Adicionar ao Carrinho
         </button>
+        <Link
+          data-testid="product-detail-link"
+          to={{
+            pathname: `/product/${product.id}`,
+            state: { propTitle: title },
+          }}
+        >
+          Ver Mais
+        </Link>
       </div>
     );
   }
