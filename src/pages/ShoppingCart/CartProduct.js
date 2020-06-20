@@ -12,7 +12,8 @@ class CartProduct extends Component {
   }
 
   decreaseQuantity() {
-    if (this.state.productQuantity > 1) {
+    const { productQuantity } = this.state;
+    if (productQuantity > 1) {
       this.setState((state) => ({ productQuantity: state.productQuantity - 1 }));
     }
   }
@@ -26,11 +27,19 @@ class CartProduct extends Component {
       <div>
         <img src={thumbnail} alt={title} />
         <p data-testid="shopping-cart-product-name">{title}</p>
-        <button data-testid="product-decrease-quantity" onClick={() => this.decreaseQuantity()}>
+        <button
+          type="button"
+          data-testid="product-decrease-quantity"
+          onClick={() => this.decreaseQuantity()}
+        >
           -
         </button>
         <p data-testid="shopping-cart-product-quantity">{productQuantity}</p>
-        <button data-testid="product-increase-quantity" onClick={() => this.increaseQuantity()}>
+        <button
+          type="button"
+          data-testid="product-increase-quantity"
+          onClick={() => this.increaseQuantity()}
+        >
           +
         </button>
         <p>{price * productQuantity}</p>

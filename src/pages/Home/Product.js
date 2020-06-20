@@ -17,7 +17,7 @@ class Product extends Component {
           data-testid="product-detail-link"
           to={{
             pathname: `/product/${product.id}`,
-            state: { propTitle: title },
+            state: { product },
           }}
         >
           Ver Mais

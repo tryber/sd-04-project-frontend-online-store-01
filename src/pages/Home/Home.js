@@ -27,9 +27,10 @@ class Home extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.category !== this.state.category) {
+    const { category } = this.state;
+    if (prevState.category !== category) {
       api
-        .getProductsFromCategoryAndQuery(null, this.state.category)
+        .getProductsFromCategoryAndQuery(null, category)
         .then((categoryProducts) => {
           this.setState({ products: categoryProducts.results });
         });

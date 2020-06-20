@@ -14,9 +14,7 @@ class App extends React.Component {
   }
 
   addToCartHandler(newProduct) {
-    this.setState((state) => ({
-      cartProducts: [...state.cartProducts, newProduct],
-    }));
+    this.setState((state) => ({ cartProducts: [...state.cartProducts, newProduct] }));
   }
 
   routeMaker(element, path) {

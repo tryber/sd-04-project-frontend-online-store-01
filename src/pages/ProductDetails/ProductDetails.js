@@ -9,42 +9,34 @@ import { getProductsFromCategoryAndQuery } from '../../services/api';
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      price: '',
-      availableQuantity: '',
-      thumbnail: '',
-    };
+    const { location: { state: { product } } } = props;
+    this.state = { product };
   }
 
   async componentDidMount() {
-    const {
-      match: {
-        params: { productID },
-      },
-    } = this.props;
-    const data = await getProductsFromCategoryAndQuery(null, null, productID);
-    this.handleProduct(data);
+    const { product } = this.state;
+    if (!product) {
+      const { match: { params: { productID } } } = this.props;
+      const data = await getProductsFromCategoryAndQuery(null, null, productID);
+      this.handleProduct(data);
+    }
   }
 
   handleProduct(data) {
-    const {
-      title,
-      price,
-      available_quantity: availableQuantity,
-      thumbnail,
-    } = data;
-    this.setState({
-      title,
-      price,
-      availableQuantity,
-      thumbnail,
-      data,
-    });
+    this.setState({ product: data });
   }
 
   render() {
-    const { addToCart, location:{state:{propTitle}} } = this.props;
-    const { availableQuantity, thumbnail, title, price, data } = this.state;
+    const { addToCart } = this.props;
+    const {
+      product: {
+        available_quantity: availableQuantity,
+        thumbnail,
+        title,
+        price,
+        data,
+      },
+    } = this.state;
     return (
       <div>
         <div>
@@ -54,7 +46,7 @@ class ProductDetails extends React.Component {
           </Link>
         </div>
         <div className="product-details-wrapper">
-          <h2 data-testid="product-detail-name">{propTitle}</h2>
+          <h2 data-testid="product-detail-name">{title}</h2>
           <img src={thumbnail} alt="Imagem do produto" />
           <p>
             Quantidade disponível:
