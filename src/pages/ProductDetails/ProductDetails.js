@@ -48,14 +48,8 @@ class ProductDetails extends React.Component {
         <div className="product-details-wrapper">
           <h2 data-testid="product-detail-name">{title}</h2>
           <img src={thumbnail} alt="Imagem do produto" />
-          <p>
-            Quantidade disponível:
-            {availableQuantity}
-          </p>
-          <p>
-            Preço: R$:
-            {price}
-          </p>
+          <p> Quantidade disponível: {availableQuantity}</p>
+          <p> Preço: R${price} </p>
           <button type="button" onClick={() => addToCart(data)}>
             Adicionar ao Carrinho
           </button>
