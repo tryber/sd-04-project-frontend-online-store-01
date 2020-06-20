@@ -23,7 +23,13 @@ class App extends React.Component {
     return (
       <Route
         path={path}
-        render={() => <ElementName addToCart={this.addToCartHandler} cartProducts={cartProducts} />}
+        render={(props) => (
+          <ElementName
+            {...props}
+            addToCart={this.addToCartHandler}
+            cartProducts={cartProducts}
+          />
+        )}
       />
     );
   }
@@ -33,7 +39,7 @@ class App extends React.Component {
       <div className="App">
         <Router>
           <Switch>
-            {this.routeMaker(ProductDetails, '/product/:produtctID')}
+            {this.routeMaker(ProductDetails, '/product/:productID')}
             {this.routeMaker(Checkout, '/checkout')}
             {this.routeMaker(ShoppingCart, '/shoppingCart')}
             {this.routeMaker(Home)}

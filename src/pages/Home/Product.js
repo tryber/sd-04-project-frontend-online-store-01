@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
   render() {
@@ -12,6 +13,15 @@ class Product extends Component {
         <button data-testid="product-add-to-cart" onClick={() => addToCart(product)} type="button">
           Adicionar ao Carrinho
         </button>
+        <Link
+          data-testid="product-detail-link"
+          to={{
+            pathname: `/product/${product.id}`,
+            state: { product },
+          }}
+        >
+          Ver Mais
+        </Link>
       </div>
     );
   }
