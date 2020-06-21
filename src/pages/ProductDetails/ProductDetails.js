@@ -16,26 +16,35 @@ class ProductDetails extends React.Component {
   async componentDidMount() {
     const { product } = this.state;
     if (!product) {
-      const { match: { params: { productID } } } = this.props;
+      const {
+        match: {
+          params: { productID },
+        },
+      } = this.props;
       const data = await getProductsFromCategoryAndQuery(null, null, productID);
       this.handleProduct(data);
     }
   }
 
   handleProduct(data) {
-    this.setState({ product: data });
+    this.setState({ product: { data } });
+  }
+
+  cartQuantityRender() {
+    const { cartProducts } = this.props;
+    const { product: { id } } = this.state;
+    const cartProductCheck = () => cartProducts.find((p) => p.id === id);
+    const cartQuantity = cartProductCheck()
+      ? cartProductCheck().cartQuantity
+      : 0;
+    return <p>Quantidade no Carrinho: {cartQuantity}</p>;
   }
 
   render() {
-    const { addToCart } = this.props;
+    const { addToCart, subFromCart, removeFromCart } = this.props;
     const {
-      product: {
-        available_quantity: availableQuantity,
-        thumbnail,
-        title,
-        price,
-        data,
-      },
+      product,
+      product: { thumbnail, title, price },
     } = this.state;
     return (
       <div>
@@ -48,10 +57,16 @@ class ProductDetails extends React.Component {
         <div className="product-details-wrapper">
           <h2 data-testid="product-detail-name">{title}</h2>
           <img src={thumbnail} alt="Imagem do produto" />
-          <p> Quantidade disponível: {availableQuantity}</p>
+          {this.cartQuantityRender()}
           <p> Preço: R${price} </p>
-          <button type="button" onClick={() => addToCart(data)}>
+          <button type="button" onClick={() => addToCart(product)}>
             Adicionar ao Carrinho
+          </button>
+          <button type="button" onClick={() => subFromCart(product)}>
+            Diminuir do Carrinho
+          </button>
+          <button type="button" onClick={() => removeFromCart(product)}>
+            Remover do Carrinho
           </button>
         </div>
       </div>
