@@ -16,11 +16,7 @@ class ProductDetails extends React.Component {
   async componentDidMount() {
     const { product } = this.state;
     if (!product) {
-      const {
-        match: {
-          params: { productID },
-        },
-      } = this.props;
+      const { match: { params: { productID } } } = this.props;
       const data = await getProductsFromCategoryAndQuery(null, null, productID);
       this.handleProduct(data);
     }

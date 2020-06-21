@@ -16,45 +16,41 @@ class App extends React.Component {
   }
 
   addToCartHandler(newProduct) {
-    this.setState((state) => {
-      return {
-        cartProducts: state.cartProducts.some(
-          (product) => product.id === newProduct.id,
-        )
-          ? state.cartProducts.map((product) => {
-            if (product.id === newProduct.id) {
-              return {
-                ...product,
-                cartQuantity: product.cartQuantity + 1,
-              };
-            }
-            return product;
-          })
-          : [...state.cartProducts, { ...newProduct, cartQuantity: 1 }],
-      };
-    });
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === newProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === newProduct.id) {
+            return {
+              ...product,
+              cartQuantity: product.cartQuantity + 1,
+            };
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...newProduct, cartQuantity: 1 }],
+    }));
   }
 
   subFromCartHandler(subProduct) {
-    this.setState((state) => {
-      return {
-        cartProducts: state.cartProducts.some(
-          (product) => product.id === subProduct.id,
-        )
-          ? state.cartProducts.map((product) => {
-            if (product.id === subProduct.id) {
-              if (product.cartQuantity > 0) {
-                return {
-                  ...product,
-                  cartQuantity: product.cartQuantity - 1,
-                };
-              }
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === subProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === subProduct.id) {
+            if (product.cartQuantity > 0) {
+              return {
+                ...product,
+                cartQuantity: product.cartQuantity - 1,
+              };
             }
-            return product;
-          })
-          : [...state.cartProducts, { ...subProduct, cartQuantity: 0 }],
-      };
-    });
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...subProduct, cartQuantity: 0 }],
+    }));
   }
 
   removeFromCart(rmvProduct) {
