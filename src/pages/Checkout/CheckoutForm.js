@@ -17,7 +17,7 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-    const { fullname, email, cpf, phone, cep, address, paymentMethod } = this.props;
+    const { fullname, email, cpf, phone, cep, address } = this.props;
     return (
       <form>
         <div>
