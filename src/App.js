@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart';
 import Checkout from './pages/Checkout/Checkout';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
+import Header from './pages/Header/Header';
 
 class App extends React.Component {
   constructor(props) {
@@ -87,6 +88,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
+          <Header />
           <Switch>
             {this.routeMaker(ProductDetails, '/product/:productID')}
             {this.routeMaker(Checkout, '/checkout')}
