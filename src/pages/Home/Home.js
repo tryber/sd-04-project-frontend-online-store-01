@@ -23,26 +23,15 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const { category } = this.state;
     if (this.props.location.state) {
-      const { location: { state: { inputValue } } } = this.props;
-      api
-        .getProductsFromCategoryAndQuery(inputValue, category)
-        .then((categoryProducts) => {
-          this.setState({ products: categoryProducts.results });
-        });
+      this.apiRequestFunc();
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { category } = this.state;
     if (prevProps !== this.props && this.props.location.state) {
-      const { location: { state: { inputValue } } } = this.props;
-      api
-        .getProductsFromCategoryAndQuery(inputValue, category)
-        .then((categoryProducts) => {
-          this.setState({ products: categoryProducts.results });
-        });
+      this.apiRequestFunc();
     }
     if (prevState.category !== category) {
       api
@@ -58,6 +47,16 @@ class Home extends Component {
     const products = await api.getProductsFromCategoryAndQuery(inputValue);
     console.log(products);
     this.setState({ products: products.results });
+  }
+
+  apiRequestFunc() {
+    const { category } = this.state;
+    const { location: { state: { inputValue } } } = this.props;
+    api
+      .getProductsFromCategoryAndQuery(inputValue, category)
+      .then((categoryProducts) => {
+        this.setState({ products: categoryProducts.results });
+      });
   }
 
   changeCategory(event) {
