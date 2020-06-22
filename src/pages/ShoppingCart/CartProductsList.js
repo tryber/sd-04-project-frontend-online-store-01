@@ -5,7 +5,7 @@ import CartProduct from './CartProduct';
 
 class CartProductsList extends Component {
   render() {
-    const { cartProducts } = this.props;
+    const { addToCart, subFromCart, removeFromCart, cartProducts, updateTotal } = this.props;
 
     if (cartProducts.length < 1) {
       return (
@@ -18,7 +18,13 @@ class CartProductsList extends Component {
     return (
       <div>
         {cartProducts.map((cartProduct) => (
-          <CartProduct cartProduct={cartProduct} />
+          <CartProduct
+            cartProduct={cartProduct}
+            addToCart={addToCart}
+            subFromCart={subFromCart}
+            removeFromCart={removeFromCart}
+            updateTotal={updateTotal}
+          />
         ))}
       </div>
     );
