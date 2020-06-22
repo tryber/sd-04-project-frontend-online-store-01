@@ -31,15 +31,36 @@ class ProductDetails extends React.Component {
 
   cartQuantityRender() {
     const { cartProducts } = this.props;
-    const {
-      product: { id },
-    } = this.state;
+    const { product: { id } } = this.state;
     const cartProductCheck = () => cartProducts.find((p) => p.id === id);
     const cartQuantity = cartProductCheck()
       ? cartProductCheck().cartQuantity
       : 0;
     return <p>Quantidade no Carrinho: {cartQuantity}</p>;
   }
+
+  buttonsRender() {
+    const { addToCart, subFromCart, removeFromCart } = this.props;
+    const { product } = this.state;
+    return (
+      <div>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={() => addToCart(product)}
+        >
+          Adicionar ao Carrinho
+        </button>
+        <button type="button" onClick={() => subFromCart(product)}>
+          Diminuir do Carrinho
+        </button>
+        <button type="button" onClick={() => removeFromCart(product)}>
+          Remover do Carrinho
+        </button>
+      </div>
+    );
+  }
+
   // form handlers
 
   handleInputChange(e) {
@@ -56,9 +77,7 @@ class ProductDetails extends React.Component {
     if (!this.state.product) {
       return <div>Carregando...</div>;
     }
-    const { addToCart, subFromCart, removeFromCart } = this.props;
     const {
-      product,
       product: { thumbnail, title, price },
       reviewInput,
     } = this.state;
@@ -75,19 +94,7 @@ class ProductDetails extends React.Component {
           <img src={thumbnail} alt="Imagem do produto" />
           {this.cartQuantityRender()}
           <p> Preço: R${price} </p>
-          <button
-            type="button"
-            data-testid="product-detail-add-to-cart"
-            onClick={() => addToCart(product)}
-          >
-            Adicionar ao Carrinho
-          </button>
-          <button type="button" onClick={() => subFromCart(product)}>
-            Diminuir do Carrinho
-          </button>
-          <button type="button" onClick={() => removeFromCart(product)}>
-            Remover do Carrinho
-          </button>
+          {this.buttonsRender()}
         </div>
         <Review
           handleSubmit={this.handleSubmit}
