@@ -1,24 +1,35 @@
 import React from 'react';
 
-
 class CheckoutForm extends React.Component {
+  newInputElement(name, labelName, testid, value) {
+    return (
+      <label htmlFor={name}>
+        {labelName}
+        <input
+          data-testid={testid}
+          type="text"
+          name={name}
+          value={value}
+          onChange={(event) => this.props.changeHandler(event)}
+        />
+      </label>
+    );
+  }
+
   render() {
-    const { changeInput } = this.props;
+    const { fullname, email, cpf, phone, cep, address, paymentMethod } = this.props;
     return (
       <form>
         <div>
           <h3>DIGITE SEUS DADOS PARA FINALIZAR A COMPRA</h3>
-          <input
-            placeholder="Nome Completp"
-            data-testid="checkout-fullname"
-            type="text"
-            onChange={changeInput}
-          />
-          <input placeholder="Email" data-testid="checkout-email" type="email" />
-          <input placeholder="CPF" data-testid="checkout-cpf" type="text" />
-          <input placeholder="Tel" data-testid="checkout-phone" type="text" />
-          <input placeholder="CEP" data-testid="checkout-address" type="text" />
-          <input placeholder="complemento" type="text" />
+          <form>
+            {this.newInputElement('fullname', 'Nome Completo', 'checkout-fullname', fullname)}
+            {this.newInputElement('email', 'Email', 'checkout-email', email)}
+            {this.newInputElement('cpf', 'CPF', 'checkout-cpf', cpf)}
+            {this.newInputElement('phone', 'Telefone', 'checkout-phone', phone)}
+            {this.newInputElement('cep', 'CEP', 'checkout-cep', cep)}
+            {this.newInputElement('address', 'Endereço', 'checkout-address', address)}
+          </form>
         </div>
       </form>
     );
