@@ -17,7 +17,7 @@ class ShoppingCart extends React.Component {
     this.updateTotal();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       this.updateTotal();
     }
@@ -26,9 +26,7 @@ class ShoppingCart extends React.Component {
   updateTotal() {
     const { cartProducts } = this.props;
     if (cartProducts.length >= 1) {
-      const result = cartProducts.reduce((acc, curr) => {
-        return acc + curr.price * curr.cartQuantity;
-      }, 0);
+      const result = cartProducts.reduce((acc, curr) => (acc + curr.price) * curr.cartQuantity, 0);
       this.setState({ totalToPay: result });
     }
   }
