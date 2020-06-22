@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 
 class CheckoutForm extends React.Component {
@@ -10,10 +9,10 @@ class CheckoutForm extends React.Component {
         <div>
           <h3>DIGITE SEUS DADOS PARA FINALIZAR A COMPRA</h3>
           <input
-          placeholder="Nome Completp"
-          data-testid="checkout-fullname"
-          type="text"
-          onChange={changeInput}
+            placeholder="Nome Completp"
+            data-testid="checkout-fullname"
+            type="text"
+            onChange={changeInput}
           />
           <input placeholder="Email" data-testid="checkout-email" type="email" />
           <input placeholder="CPF" data-testid="checkout-cpf" type="text" />
@@ -22,7 +21,7 @@ class CheckoutForm extends React.Component {
           <input placeholder="complemento" type="text" />
         </div>
       </form>
-    )
+    );
   }
 }
 
