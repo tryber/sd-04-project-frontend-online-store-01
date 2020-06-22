@@ -1,27 +1,9 @@
 import React, { Component } from 'react';
 
 class CartProduct extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { productQuantity: 1 };
-  }
-
-  increaseQuantity() {
-    this.setState((state) => ({ productQuantity: state.productQuantity + 1 }));
-  }
-
-  decreaseQuantity() {
-    const { productQuantity } = this.state;
-    if (productQuantity > 1) {
-      this.setState((state) => ({ productQuantity: state.productQuantity - 1 }));
-    }
-  }
-
   render() {
-    const { productQuantity } = this.state;
-    const { cartProduct } = this.props;
-    const { title, price, thumbnail } = cartProduct;
+    const { addToCart, subFromCart, removeFromCart, cartProduct } = this.props;
+    const { title, price, thumbnail, cartQuantity } = cartProduct;
 
     return (
       <div>
@@ -30,19 +12,22 @@ class CartProduct extends Component {
         <button
           type="button"
           data-testid="product-decrease-quantity"
-          onClick={() => this.decreaseQuantity()}
+          onClick={() => subFromCart(cartProduct)}
         >
           -
         </button>
-        <p data-testid="shopping-cart-product-quantity">{productQuantity}</p>
+        <p data-testid="shopping-cart-product-quantity">Quantidade do produto: {cartQuantity}</p>
         <button
           type="button"
           data-testid="product-increase-quantity"
-          onClick={() => this.increaseQuantity()}
+          onClick={() => addToCart(cartProduct)}
         >
           +
         </button>
-        <p>{price * productQuantity}</p>
+        <p>Preço total do item: R${price * cartQuantity}</p>
+        <button type="button" onClick={() => removeFromCart(cartProduct)}>
+          Remover do Carrinho
+        </button>
       </div>
     );
   }
