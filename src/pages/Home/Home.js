@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import './Home.css';
 
 import * as api from '../../services/api';
 
 import Categories from './Categories';
 import ProductList from './ProductList';
-import SearchBar from './SearchBar';
 
 class Home extends Component {
   constructor(props) {
@@ -26,8 +22,17 @@ class Home extends Component {
     this.changeCategory = this.changeCategory.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.location.state) {
+      this.apiRequestFunc();
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { category } = this.state;
+    if (prevProps !== this.props && this.props.location.state) {
+      this.apiRequestFunc();
+    }
     if (prevState.category !== category) {
       api
         .getProductsFromCategoryAndQuery(null, category)
@@ -40,7 +45,18 @@ class Home extends Component {
   async getProducts() {
     const { inputValue } = this.state;
     const products = await api.getProductsFromCategoryAndQuery(inputValue);
+    console.log(products);
     this.setState({ products: products.results });
+  }
+
+  apiRequestFunc() {
+    const { category } = this.state;
+    const { location: { state: { inputValue } } } = this.props;
+    api
+      .getProductsFromCategoryAndQuery(inputValue, category)
+      .then((categoryProducts) => {
+        this.setState({ products: categoryProducts.results });
+      });
   }
 
   changeCategory(event) {
@@ -53,24 +69,9 @@ class Home extends Component {
 
   render() {
     const { addToCart } = this.props;
-    const { inputValue, products } = this.state;
+    const { products } = this.state;
     return (
       <div>
-        <div className="search-and-cart">
-          <SearchBar
-            inputValue={inputValue}
-            changeHandle={this.changeHandle}
-            getProducts={this.getProducts}
-          />
-          <div className="shopping-cart-icon ">
-            <Link data-testid="shopping-cart-button" to="/shoppingcart">
-              <FontAwesomeIcon
-                icon={faShoppingCart}
-                className="faShoppingCart"
-              />
-            </Link>
-          </div>
-        </div>
         <div className="main-container">
           <div className="categories">
             <Categories changeCategory={this.changeCategory} />
