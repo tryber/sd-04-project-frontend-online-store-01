@@ -11,10 +11,57 @@ class App extends React.Component {
     super(props);
     this.state = { cartProducts: [] };
     this.addToCartHandler = this.addToCartHandler.bind(this);
+    this.subFromCartHandler = this.subFromCartHandler.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
 
   addToCartHandler(newProduct) {
-    this.setState((state) => ({ cartProducts: [...state.cartProducts, newProduct] }));
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === newProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === newProduct.id) {
+            return {
+              ...product,
+              cartQuantity: product.cartQuantity + 1,
+            };
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...newProduct, cartQuantity: 1 }],
+    }));
+  }
+
+  subFromCartHandler(subProduct) {
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === subProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === subProduct.id) {
+            if (product.cartQuantity > 0) {
+              return {
+                ...product,
+                cartQuantity: product.cartQuantity - 1,
+              };
+            }
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...subProduct, cartQuantity: 0 }],
+    }));
+  }
+
+  removeFromCart(rmvProduct) {
+    this.setState((state) => {
+      const newCartProducts = [...state.cartProducts];
+      const index = newCartProducts.findIndex(
+        (product) => product.id === rmvProduct.id,
+      );
+      newCartProducts.splice(index, 1);
+      return { cartProducts: newCartProducts };
+    });
   }
 
   routeMaker(element, path) {
@@ -27,6 +74,8 @@ class App extends React.Component {
           <ElementName
             {...props}
             addToCart={this.addToCartHandler}
+            subFromCart={this.subFromCartHandler}
+            removeFromCart={this.removeFromCart}
             cartProducts={cartProducts}
           />
         )}
