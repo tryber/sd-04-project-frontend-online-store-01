@@ -36,7 +36,7 @@ class ProductDetails extends React.Component {
   }
 
   buttonsRender() {
-    const { addToCart, subFromCart, removeFromCart } = this.props;
+    const { addToCart } = this.props;
     const { product } = this.state;
     return (
       <div>

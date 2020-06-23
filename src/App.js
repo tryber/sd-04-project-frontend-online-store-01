@@ -18,14 +18,18 @@ class App extends React.Component {
 
   componentDidMount() {
     if (localStorage.products) {
-      const storageItems = localStorage.getItem('products');
-      this.setState({ cartProducts: JSON.parse(storageItems) });
+      this.updateWithStorage();
     }
   }
 
   componentDidUpdate() {
     const { cartProducts } = this.state;
     localStorage.setItem('products', JSON.stringify(cartProducts));
+  }
+
+  updateWithStorage() {
+    const storageItems = localStorage.getItem('products');
+    this.setState({ cartProducts: JSON.parse(storageItems) });
   }
 
   addToCartHandler(newProduct) {
