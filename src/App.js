@@ -39,9 +39,16 @@ class App extends React.Component {
       )
         ? state.cartProducts.map((product) => {
           if (product.id === newProduct.id) {
+            const {
+              available_quantity: availableQuantity,
+              cartQuantity,
+            } = product;
             return {
               ...product,
-              cartQuantity: product.cartQuantity + 1,
+              cartQuantity:
+                availableQuantity <= cartQuantity
+                  ? availableQuantity
+                  : product.cartQuantity + 1,
             };
           }
           return product;

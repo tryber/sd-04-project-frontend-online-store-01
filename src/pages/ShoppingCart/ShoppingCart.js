@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
 import CartProductsList from './CartProductsList';
 
 class ShoppingCart extends React.Component {
@@ -37,11 +34,6 @@ class ShoppingCart extends React.Component {
 
     return (
       <div>
-        <div className="shopping-cart-icon ">
-          <Link data-testid="shopping-cart-button" to="/shoppingcart">
-            <FontAwesomeIcon icon={faShoppingCart} className="faShoppingCart" />
-          </Link>
-        </div>
         <h1>Carrinho de Compras</h1>
         <CartProductsList
           addToCart={addToCart}
