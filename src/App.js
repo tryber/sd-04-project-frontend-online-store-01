@@ -16,6 +16,18 @@ class App extends React.Component {
     this.removeFromCart = this.removeFromCart.bind(this);
   }
 
+  componentDidMount() {
+    if (localStorage.products) {
+      const storageItems = localStorage.getItem('products');
+      this.setState({ cartProducts: JSON.parse(storageItems) });
+    }
+  }
+
+  componentDidUpdate() {
+    const { cartProducts } = this.state;
+    localStorage.setItem('products', JSON.stringify(cartProducts));
+  }
+
   addToCartHandler(newProduct) {
     this.setState((state) => ({
       cartProducts: state.cartProducts.some(
@@ -85,10 +97,11 @@ class App extends React.Component {
   }
 
   render() {
+    const { cartProducts } = this.state;
     return (
       <div className="App">
         <Router>
-          <Header />
+          <Header cartProducts={cartProducts} />
           <Switch>
             {this.routeMaker(ProductDetails, '/product/:productID')}
             {this.routeMaker(Checkout, '/checkout')}

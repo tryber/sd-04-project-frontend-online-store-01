@@ -47,12 +47,12 @@ class ProductDetails extends React.Component {
         >
           Adicionar ao Carrinho
         </button>
-        <button type="button" onClick={() => subFromCart(product)}>
+        {/* <button type="button" onClick={() => subFromCart(product)}>
           Diminuir do Carrinho
         </button>
         <button type="button" onClick={() => removeFromCart(product)}>
           Remover do Carrinho
-        </button>
+        </button> */}
       </div>
     );
   }
