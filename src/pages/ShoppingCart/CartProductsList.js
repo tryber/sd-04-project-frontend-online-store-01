@@ -19,6 +19,7 @@ class CartProductsList extends Component {
       <div>
         {cartProducts.map((cartProduct) => (
           <CartProduct
+            key={cartProduct.id}
             cartProduct={cartProduct}
             addToCart={addToCart}
             subFromCart={subFromCart}
